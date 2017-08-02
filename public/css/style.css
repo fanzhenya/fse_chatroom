@@ -1,0 +1,13 @@
+header, body {
+    height: 100%;
+}
+body {
+    background-color: lightgrey;
+    padding-top: 50px;
+}
+.info {
+    color: green;
+}
+.message-meta {
+    color: dimgray;
+}

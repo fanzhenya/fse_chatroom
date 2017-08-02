@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+
+    <title>FSE Chatroom</title>
+
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container-fluid" id="join-div">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">
+                Welcome to FSE Chatroom!
+            </h3>
+            <form id="join-form" class="form-horizontal" action="" role="form">
+                <div class="form-group">
+
+                    <label for="inputUsername3" class="col-xs-2 control-label">
+                        Username
+                    </label>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="inputUsername3">
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label for="inputPassword3" class="col-xs-2 control-label">
+                        Password
+                    </label>
+                    <div class="col-xs-10">
+                        <input type="password" class="form-control" id="inputPassword3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-offset-2 col-xs-10">
+                        <div class="checkbox">
+
+                            <label>
+                                <input type="checkbox" id="inputRegister3"> Register me as new user
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-offset-2 col-xs-10">
+                        <button class="btn btn-default">
+                            Join
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="chat-div" class="container-fluid fill-height" style="display: none">
+    <div class="row navbar-fixed-top">
+        <h4 class="col-xs-10" id="my-username">FSE Chatroom - Logged in as: </h4>
+        <button id="leave-btn" class="col-xs-2">
+            Leave
+        </button>
+    </div>
+    <div class="row navbar-fixed-bottom" >
+        <form action="" id="chat-form">
+            <input id="m" class="col-xs-10" autocomplete="off" />
+            <button class="col-xs-2">Send</button>
+        </form>
+    </div>
+    <div class="row">
+        <ul id="messages">
+        </ul>
+    </div>
+    <!--<div class="panel col-md-2 fill-height" >-->
+    <!--<div class="panel-heading">-->
+    <!--<h4>Online users</h4>-->
+    <!--</div>-->
+    <!--<ul>-->
+    <!--<li>-->
+    <!--Tom-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+</div>
+
+<script src="socket.io/socket.io.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>
