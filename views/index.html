@@ -62,20 +62,33 @@
 </div>
 <div id="chat-div" class="container-fluid fill-height" style="display: none">
     <div class="row navbar-fixed-top">
-        <h4 class="col-xs-10" id="my-username">FSE Chatroom - Logged in as: </h4>
-        <button id="leave-btn" class="col-xs-2">
-            Leave
+        <h4 class="col-xs-11" style="text-align: center">FSE Chatroom - Logged in as: <span id="my-username"> test </span> </h4>
+        <button id="leave-btn" class="col-xs-1 btn btn-danger">
+            X
         </button>
     </div>
     <div class="row navbar-fixed-bottom" >
-        <form action="" id="chat-form">
-            <input id="m" class="col-xs-10" autocomplete="off" />
-            <button class="col-xs-2">Send</button>
+        <form action="" id="chat-form" class="input-group">
+            <input id="m" class="form-control input-lg" placeholder="Type your message here..." autocomplete="off" />
+            <span class="input-group-btn">
+                <button class="btn btn-primary btn-lg" type="button">Send</button>
+            </span>
         </form>
     </div>
     <div class="row">
-        <ul id="messages">
-        </ul>
+        <div class="col-xs-2">
+            <div class="well nav nav-pills nav-stacked" data-spy="affix" data-offset-top="50">
+                <h5>Online</h5>
+                <!--<ul >-->
+                <ul id="onlineUsers" class="list-group">
+                    <li class="list-group-item">fzy</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-10">
+            <ul id="messages">
+            </ul>
+        </div>
     </div>
     <!--<div class="panel col-md-2 fill-height" >-->
     <!--<div class="panel-heading">-->

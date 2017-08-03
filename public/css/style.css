@@ -4,10 +4,22 @@ header, body {
 body {
     background-color: lightgrey;
     padding-top: 50px;
+    padding-bottom: 50px;
 }
 .info {
     color: green;
 }
 .message-meta {
     color: dimgray;
+}
+#chat-form {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+div.navbar-fixed-top {
+    /*background: rgba(128, 128, 128, 0.7)*/
+    background-color: rgba(134,207,255,0.8);
+}
+.affix {
+    top: 70px;
 }
