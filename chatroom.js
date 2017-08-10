@@ -1,24 +1,53 @@
 module.exports = Chatroom;
+Promise = require("promise");
 
 function Chatroom() {
-    this.db = require('./db');
+    var db = require('./db');
     var onlineUsers = [];
-    this.isValidLogin = function (username, password, callback) {
-        // TODO: if username and password match
 
-        // if not already online
-        if (onlineUsers.indexOf(username) === -1) {
-            callback(true);
-            return true;
-        } else {
-            callback(false, username + " is already online");
-            return false;
-        }
+    this.userRegister = function (registerInfo) {
+        return db.getUserPromise(registerInfo.username)
+            .then(function (user) {
+                return new Promise(function (resol, rej) {
+                    if (user) {
+                        rej("user " + registerInfo.username + " already exist");
+                    } else {
+                        db.insertUser({
+                            name: registerInfo.username,
+                            password: registerInfo.password
+                        });
+                        db.getUsers();
+                        resol();
+                    }
+                });
+            }, function (reason) {
+                console.error("db error: " + reason);
+            });
     };
 
-    this.userJoin = function (username, historyCallback) {
-        onlineUsers.push(username);
-        this.db.getMessages(historyCallback);
+    this.userJoin = function (loginInfo) {
+        return db.getUserPromise(loginInfo.username)
+            .then(function (user) {
+                return new Promise(function (resol, rej) {
+                    if (!user) {
+                        rej("user " + loginInfo.username + "does not exist");
+                    } else if (user.password !== loginInfo.password) {
+                        rej("wrong username + password combination");
+                    } else if (onlineUsers.indexOf(loginInfo.username) !== -1) {
+                        rej("user " + loginInfo.username + " is already online")
+                    } else {
+                        onlineUsers.push(loginInfo.username);
+                        resol();
+                    }
+                });
+            }, function (reason) {
+                console.error("db error: " + reason);
+            });
+    };
+
+    this.getHistoryMessages = function (historyCallback) {
+        // onlineUsers.push(username);
+        db.getMessages(historyCallback);
     };
 
     this.userLeave = function (username) {
@@ -27,7 +56,7 @@ function Chatroom() {
 
     this.newMessage = function (msg) {
         // msg persisting
-        this.db.insertMessage(msg);
+        db.insertMessage(msg);
     };
 }
 

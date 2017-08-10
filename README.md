@@ -6,6 +6,7 @@
 [] online users list ui and logic
 
 ## db
+[ ] user register
 - user password check
 - user info persistence
 [x] chat msg persistence

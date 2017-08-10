@@ -20,37 +20,52 @@ var room = new Chatroom();
 io.on('connection', function (socket) {
     console.log("new connection: " + socket.id);
 
-    socket.on('up user join', function (loginInfo, loginCallback) {
-        var username = loginInfo.username;
-        var password = loginInfo.password;
-        if (room.isValidLogin(username, password, loginCallback)) {
-            room.userJoin(username, function (history) {
-                // push history to this user
-                socket.emit("down message", history);
+    socket.on('up user register', function (registerInfo, registerCallback) {
+        room.userRegister(registerInfo)
+            .then(function () {
+                registerCallback(true, "You can login now");
+                console.log("registered: " + JSON.stringify(registerInfo));
+            })
+            .catch(function (reason) {
+                registerCallback(false, reason);
+                console.log("userRegister fail: " + reason + " " + JSON.stringify(registerInfo));
             });
+    });
 
-            socket.username = username;
+    socket.on('up user join', function (loginInfo, loginCallback) {
+        room.userJoin(loginInfo)
+            .then(function () {
+                loginCallback(true);
+                // push history to this user
+                room.getHistoryMessages(function (history) {
+                    socket.emit("down message", history);
+                });
 
-            // notify other users
-            io.emit("down user join", username);
-            console.log("join: " + JSON.stringify(loginInfo));
-        } else {
-            console.log("invalid join: " + JSON.stringify(loginInfo));
+                socket.username = loginInfo.username;
+
+                // notify other users
+                io.emit("down user join", loginInfo.username);
+                console.log("joined: " + JSON.stringify(loginInfo));
+            })
+            .catch(function (reason) {
+                loginCallback(false, reason);
+                console.log("userJoin fail: " + reason + " " + JSON.stringify(loginInfo));
+            });
+    });
+
+    var userLeaveHandler = function () {
+        room.userLeave(socket.username);
+        // notify other uses
+        io.emit("down user leave", socket.username);
+        console.log("userLeave: " + socket.username);
+    };
+
+    socket.on('up user leave', userLeaveHandler);
+
+    socket.on('disconnect', function() {
+        if (socket.username) {
+            userLeaveHandler();
         }
-    });
-
-    socket.on('up user leave', function () {
-        room.userLeave(socket.username);
-        // notify other uses
-        io.emit("down user leave", socket.username);
-        console.log("leave: " + socket.username);
-    });
-
-    socket.on('disconnect', function () {
-        room.userLeave(socket.username);
-        // notify other uses
-        io.emit("down user leave", socket.username);
-        console.log("connection " + socket.id + " for user " + socket.username + " closed");
     });
 
     socket.on('up message', function (msg) {

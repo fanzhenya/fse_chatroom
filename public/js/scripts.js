@@ -12,12 +12,11 @@ $(function () {
 
     var myUsername = null;
 
-    $('#join-form').submit(function () {
+    $('#join-btn').click(function () {
         var username = inputUsername.val();
         var password = inputPassword.val();
-        var isRegister = document.getElementById("inputRegister3").checked;
-        console.log(username + " " + password + " is register: " + isRegister);
-        var loginInfo = {username: username, password: password, isRegister: isRegister};
+        console.log(username + " " + password);
+        var loginInfo = {username: username, password: password};
         socket.emit("up user join", loginInfo, function (isSuccess, msg) {
             if(!isSuccess) {
                 alert("Error: " + msg);
@@ -30,7 +29,20 @@ $(function () {
                 $('#my-username').html(myUsername);
             }
         });
-        return false;
+    });
+
+    $('#register-btn').click(function () {
+        var username = inputUsername.val();
+        var password = inputPassword.val();
+        console.log(username + " " + password);
+        var registerInfo = {username: username, password: password};
+        socket.emit("up user register", registerInfo, function (isSuccess, msg) {
+            if(!isSuccess) {
+                alert("Error: " + msg);
+            } else {
+                alert("Success: " + msg);
+            }
+        });
     });
 
     socket.on('down user join', function (username) {
@@ -40,13 +52,17 @@ $(function () {
         }
     });
 
-    // up user leave
-    $('#leave-btn').click(function () {
-        console.log("leave:" + myUsername);
+    var resetView = function () {
         joinDiv.show();
         chatDiv.hide();
         myUsername = null;
         messages.empty();
+    };
+
+    // up user leave
+    $('#leave-btn').click(function () {
+        console.log("leave:" + myUsername);
+        resetView();
         socket.emit("up user leave");
     });
 
@@ -59,6 +75,7 @@ $(function () {
 
     function insertSystemInfo(info) {
         messages.append('<li class="list-unstyled info" >' + info + '</li>');
+        window.scrollTo(0,document.body.scrollHeight);
     }
 
     // up message
@@ -84,5 +101,9 @@ $(function () {
             messages.append('<li class="list-unstyled">' + formattedMsg + '</li>');
             window.scrollTo(0,document.body.scrollHeight);
         }
+    });
+
+    socket.on("disconnect", function () {
+        resetView();
     });
 });
