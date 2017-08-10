@@ -9,6 +9,7 @@ $(function () {
     var inputUsername = $("#inputUsername3");
     var inputPassword = $("#inputPassword3");
     var messages = $('#messages');
+    var onlineUsers = $('#online-users');
 
     var myUsername = null;
 
@@ -45,19 +46,13 @@ $(function () {
         });
     });
 
-    socket.on('down user join', function (username) {
+    socket.on('down user join', function (username, onlineUsers) {
         if (myUsername !== null && username !== inputUsername.val()) {
             // some other guy logged in.
             insertSystemInfo(username + " joined");
         }
+        updateOnlineUsers(onlineUsers);
     });
-
-    var resetView = function () {
-        joinDiv.show();
-        chatDiv.hide();
-        myUsername = null;
-        messages.empty();
-    };
 
     // up user leave
     $('#leave-btn').click(function () {
@@ -67,16 +62,12 @@ $(function () {
     });
 
     // down user leave
-    socket.on('down user leave', function (username) {
-        if(myUsername !== null) {
+    socket.on('down user leave', function (username, onlineUsers) {
+        if(myUsername !== null) { // if user has already joined
             insertSystemInfo(username + " left");
+            updateOnlineUsers(onlineUsers);
         }
     });
-
-    function insertSystemInfo(info) {
-        messages.append('<li class="list-unstyled info" >' + info + '</li>');
-        window.scrollTo(0,document.body.scrollHeight);
-    }
 
     // up message
     $('#chat-form').submit(function () {
@@ -106,4 +97,25 @@ $(function () {
     socket.on("disconnect", function () {
         resetView();
     });
+
+    var resetView = function () {
+        joinDiv.show();
+        chatDiv.hide();
+        myUsername = null;
+        messages.empty();
+    };
+
+    var updateOnlineUsers = function (users) {
+        onlineUsers.empty();
+        users.forEach(function (t) {
+            onlineUsers.append ('<li class="list-unstyled info" >' + t + '</li>');
+        });
+
+    };
+
+    function insertSystemInfo(info) {
+        messages.append('<li class="list-unstyled info" >' + info + '</li>');
+        window.scrollTo(0,document.body.scrollHeight);
+    }
+
 });

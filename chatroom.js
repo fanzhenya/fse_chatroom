@@ -54,6 +54,10 @@ function Chatroom() {
         onlineUsers.splice(onlineUsers.indexOf(username), 1);
     };
 
+    this.getOnlineUsers = function () {
+        return onlineUsers;
+    };
+
     this.newMessage = function (msg) {
         // msg persisting
         db.insertMessage(msg);

@@ -44,7 +44,7 @@ io.on('connection', function (socket) {
                 socket.username = loginInfo.username;
 
                 // notify other users
-                io.emit("down user join", loginInfo.username);
+                io.emit("down user join", loginInfo.username, room.getOnlineUsers());
                 console.log("joined: " + JSON.stringify(loginInfo));
             })
             .catch(function (reason) {
@@ -56,14 +56,14 @@ io.on('connection', function (socket) {
     var userLeaveHandler = function () {
         room.userLeave(socket.username);
         // notify other uses
-        io.emit("down user leave", socket.username);
+        io.emit("down user leave", socket.username, room.getOnlineUsers());
         console.log("userLeave: " + socket.username);
     };
 
     socket.on('up user leave', userLeaveHandler);
 
     socket.on('disconnect', function() {
-        if (socket.username) {
+        if (socket.username) { //if user already joined
             userLeaveHandler();
         }
     });
