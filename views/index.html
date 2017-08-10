@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8">
     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>FSE Chatroom</title>
-
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -20,7 +19,7 @@
             <h3 class="text-center">
                 Welcome to FSE Chatroom!
             </h3>
-            <div id="join-form" class="form-horizontal" action="" role="form">
+            <div id="join-form" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label for="inputUsername3" class="col-xs-2 control-label">
                         Username
@@ -54,7 +53,7 @@
 <div id="chat-div" class="container-fluid fill-height" style="display: none">
     <div class="row navbar-fixed-top">
         <h4 class="col-xs-11" style="text-align: center">FSE Chatroom - Logged in as: <span id="my-username"> test </span> </h4>
-        <button id="leave-btn" class="col-xs-1 btn btn-danger">
+        <button id="leave-btn" class="col-xs-1 btn btn-large btn-danger">
             X
         </button>
     </div>
@@ -68,12 +67,9 @@
     </div>
     <div class="row">
         <div class="col-xs-2">
-            <div class="well nav nav-pills nav-stacked" data-spy="affix" data-offset-top="50">
+            <div class="well nav nav-pills nav-stacked" data-spy="affix" data-offset-top="0">
                 <h5>Online</h5>
-                <!--<ul >-->
-                <ul id="online-users" class="list-group">
-                    <!--<li class="list-group-item">fzy</li>-->
-                </ul>
+                <ul id="online-users" class="list-group"> </ul>
             </div>
         </div>
         <div class="col-xs-10">
@@ -86,6 +82,7 @@
 <script src="socket.io/socket.io.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/scripts.js"></script>
+<script src="js/client.js"></script>
+
 </body>
 </html>

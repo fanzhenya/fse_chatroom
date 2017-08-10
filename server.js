@@ -2,19 +2,16 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var Chatroom = require('./chatroom');
 
-// app.set("view engine", "jade");
-// app.set("views", __dirname + "/views");
 app.use(express.static("public"));
 
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/views/index.html");
-    // res.render("index");
 });
 
 http.listen(3000);
 
+var Chatroom = require('./chatroom');
 var room = new Chatroom();
 
 io.on('connection', function (socket) {
@@ -80,5 +77,4 @@ io.on('connection', function (socket) {
         io.emit('down message', message);
         console.log("socket " + socket.username + ": " + msg.text);
     });
-
 });

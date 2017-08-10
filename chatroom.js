@@ -58,9 +58,6 @@ function Chatroom() {
         return onlineUsers;
     };
 
-    this.newMessage = function (msg) {
-        // msg persisting
-        db.insertMessage(msg);
-    };
+    this.newMessage = db.insertMessage;
 }
 

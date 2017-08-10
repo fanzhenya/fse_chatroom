@@ -98,20 +98,19 @@ $(function () {
         resetView();
     });
 
-    var resetView = function () {
+    function resetView() {
         joinDiv.show();
         chatDiv.hide();
         myUsername = null;
         messages.empty();
-    };
+    }
 
-    var updateOnlineUsers = function (users) {
+    function updateOnlineUsers (users) {
         onlineUsers.empty();
         users.forEach(function (t) {
             onlineUsers.append ('<li class="list-unstyled info" >' + t + '</li>');
         });
-
-    };
+    }
 
     function insertSystemInfo(info) {
         messages.append('<li class="list-unstyled info" >' + info + '</li>');
