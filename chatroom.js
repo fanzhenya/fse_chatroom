@@ -45,10 +45,7 @@ function Chatroom() {
             });
     };
 
-    this.getHistoryMessages = function (historyCallback) {
-        // onlineUsers.push(username);
-        db.getMessages(historyCallback);
-    };
+    this.getHistoryMessages = db.getMessages;
 
     this.userLeave = function (username) {
         onlineUsers.splice(onlineUsers.indexOf(username), 1);

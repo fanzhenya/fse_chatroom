@@ -9,7 +9,6 @@ db.serialize(function () {
         "(username INTEGER, text TEXT, ts TEXT)");
 });
 
-
 module.exports.insertUser = function (user) {
     db.run("INSERT INTO users VALUES (?, ?)", [user.name, user.password]);
 };
