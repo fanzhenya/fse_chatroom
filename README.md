@@ -8,7 +8,7 @@
 ## db
 - user password check
 - user info persistence
-- chat msg persistence
+[x] chat msg persistence
 
 ## refactor
 - class
@@ -23,5 +23,5 @@ https://socket.io/docs/emit-cheatsheet/
 
 ## to learn
 [x] socketio broadcast/single cast
-- no-sql db mongo?
+[x] no-sql db mongo?
 

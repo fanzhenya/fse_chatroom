@@ -20,7 +20,7 @@ $(function () {
         var loginInfo = {username: username, password: password, isRegister: isRegister};
         socket.emit("up user join", loginInfo, function (isSuccess, msg) {
             if(!isSuccess) {
-                alert("Error:" + msg);
+                alert("Error: " + msg);
             } else {
                 joinDiv.hide();
                 chatDiv.show();
