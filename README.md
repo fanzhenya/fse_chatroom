@@ -1,10 +1,9 @@
 CMU FSE course assignment
 ------------------------------------------------
 
-![screenshot](./doc/screenshot-1.png)
+<img src="./doc/screenshot-1.png" width="500"/>
 
-![screenshot](./doc/screenshot-2.png)
-
+<img src="./doc/screenshot-2.png" width="500"/>
 
 ## Feature Overview
 
@@ -42,13 +41,17 @@ CMU FSE course assignment
 
 For example, below picture shows the interaction between client/server when a new users is trying to join the chatroom.
 
-![](./doc/seq-new-user-join.png)
+<p align="center">
+  <img src="./doc/seq-new-user-join.png" width="600"/>
+</p>
 
 ### Classes
 
 The chatroom is abstracted as a class show in below picture.
 
-![](./doc/class-chatroom.png)
+<p align="center">
+  <img src="./doc/class-chatroom.png" width="200"/>
+</p>
 
 ## Implementation
 
