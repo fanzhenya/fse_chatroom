@@ -1,5 +1,5 @@
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database(':memory:');
+var db = new sqlite3.Database('chatroom.db');
 var Promise = require('promise');
 
 db.serialize(function () {
@@ -46,11 +46,8 @@ module.exports.getMessages = function (callback) {
 module.exports.populateDemoData = function () {
     this.insertUser({name: "alice", password: "alice123"});
     this.insertUser({name: "bob", password:"bob123"});
-    this.insertMessage({username: "tom", ts: "1000", text:"hello this is tom"});
-    this.insertMessage({username: "alice", ts: "2000", text:"hello this is alice"});
-    this.insertMessage({username: "tom", ts: "3000", text:"nice to meet you alice"});
-    this.insertMessage({username: "bob", ts: "4000", text:"nice to meet you alice"});
+    this.insertMessage({username: "alice", ts: '10:35:04 PM Thu Aug 10 2017', text:"Hello every one I'm Alice"});
+    this.insertMessage({username: "bob", ts: '10:35:30 PM Thu Aug 10 2017', text:"Hi, this is Bob"});
 };
 
-
-this.populateDemoData();
+// this.populateDemoData();

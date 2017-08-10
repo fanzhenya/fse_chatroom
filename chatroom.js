@@ -30,9 +30,9 @@ function Chatroom() {
             .then(function (user) {
                 return new Promise(function (resol, rej) {
                     if (!user) {
-                        rej("user " + loginInfo.username + "does not exist");
+                        rej("user " + loginInfo.username + " does not exist");
                     } else if (user.password !== loginInfo.password) {
-                        rej("wrong username + password combination");
+                        rej("wrong username and password combination");
                     } else if (onlineUsers.indexOf(loginInfo.username) !== -1) {
                         rej("user " + loginInfo.username + " is already online")
                     } else {
