@@ -1,6 +1,8 @@
 CMU FSE course assignment
 ------------------------------------------------
 
+Demo Video: https://youtu.be/OIwCLHuCnzI
+
 <img src="./doc/screenshot-1.png" width="500"/>
 
 <img src="./doc/screenshot-2.png" width="500"/>
